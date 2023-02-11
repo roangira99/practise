@@ -1,5 +1,5 @@
-l = [6, 8, 1, 4, 10, 7, 8, 9, 3, 2, 5]
-my_dict = {'py': 'python', 'rb': 'ruby', 'js': 'javascript'}
+# l = [6, 8, 1, 4, 10, 7, 8, 9, 3, 2, 5]
+# my_dict = {'py': 'python', 'rb': 'ruby', 'js': 'javascript'}
 
 # # sum of all ints
 # sum = 0
@@ -37,8 +37,8 @@ my_dict = {'py': 'python', 'rb': 'ruby', 'js': 'javascript'}
 # for key, value in my_dict.items():
 #     print(f"key is {key}, value is {value}")
 
-from random import randint, choice
-from string import ascii_lowercase
+# from random import randint, choice
+# from string import ascii_lowercase
 # Generate random integers between 1 and 100
 
 # l1 = []
@@ -68,5 +68,54 @@ from string import ascii_lowercase
 
 # print(l4)
 
-l5 = list(set([randint(1,1000) for num in range(100)]))
-print(l5)
+
+# While loops
+# truth_condition = True
+
+# while truth_condition:
+#     print('hello')
+#     break
+
+# i = 0
+# while i < 10:
+#     print(i)
+#     i += 1
+
+# from random import randint
+
+# l1 = [randint(1,100) for num in range(1000)]
+# i = 0
+# num_to_search = 25
+# while i < len(l1):
+#     if l1[i] == num_to_search:
+#         print(f"{num_to_search} found in index {i}")
+#         break
+#     i += 1
+
+# for num in l1:
+#     i += 1
+#     if num == num_to_search:
+#         print(f"{num_to_search} found in index {i}")
+#         break
+
+# OR
+# num_to_search = 25
+# for index, num in enumerate(l1):
+#     if num == num_to_search:
+#         print(f"{num_to_search} found in index {index}")
+#         break
+
+# while True:
+#     print("Please choose an option from the list below:")
+#     print("Press 1 for selection 1")
+#     print("Press 2 for selection 2")
+#     print("Press 3 to quit")
+#     selection = input("Enter your choice-> ")
+#     if int(selection) == 3:
+#         break
+
+# l1 = ['.py', '.js', '.rb', '.java', '.c']
+# l2 = ['python', 'javascript', 'ruby', 'java', 'c']
+# tupled_list = list(zip(l2, l1))
+# print(tupled_list)
+
