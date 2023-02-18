@@ -100,3 +100,51 @@
 # NB: Setting courses=None in the init method allows a new student object to be 
 # created without having any courses selected
 
+# Adding special/dunder methods to the class
+class Student:
+
+    def __init__(self, first, last, courses = None):
+        self.first_name = first
+        self.last_name = last
+        if courses == None:
+            self.courses = []
+        else:
+            self.courses = courses
+
+    def add_course(self, course):
+        if course not in self.courses:
+            self.courses.append(course)
+        else:
+            print(f"{self.first_name} is already\
+ enrolled in the {course} course")
+
+    def remove_course(self, course):
+        if course in self.courses:
+            self.courses.remove(course)
+        else:
+            print(f"{course} not found")
+
+    def __len__(self):
+        return len(self.courses)
+
+    def __repr__(self):
+        return f"Student('{self.first_name}','{self.last_name}',{self.courses})"
+
+    # Using the dunder str method:
+    def __str__(self):
+        return f"First name: {self.first_name.capitalize()}\nLast name: {self.last_name.capitalize()}\
+        \nCourses: {', '.join(map(str.capitalize, self.courses))}"
+        # In the above case we use the map function and provide it with the capitalize method, and
+        # it will run it on each element in the list (the list is the iterable in this case)
+
+courses_1 = ['python', 'rails', 'javascript']
+courses_2 = ['java', 'rails', 'c']
+shaka = Student("shaka", "stuntin",courses_1)
+jackie = Student("jackie", "briggs",courses_2)
+print(shaka)
+print(repr(shaka))
+# print(len(shaka))
+print(jackie)
+print(repr(jackie))
+# print(dir(shaka))
+# print(shaka.__dict__)
