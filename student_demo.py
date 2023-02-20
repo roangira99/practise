@@ -137,14 +137,23 @@ class Student:
         # In the above case we use the map function and provide it with the capitalize method, and
         # it will run it on each element in the list (the list is the iterable in this case)
 
-courses_1 = ['python', 'rails', 'javascript']
-courses_2 = ['java', 'rails', 'c']
-shaka = Student("shaka", "stuntin",courses_1)
-jackie = Student("jackie", "briggs",courses_2)
-print(shaka)
-print(repr(shaka))
+# courses_1 = ['python', 'rails', 'javascript']
+# courses_2 = ['java', 'rails', 'c']
+# shaka = Student("shaka", "stuntin",courses_1)
+# jackie = Student("jackie", "briggs",courses_2)
+# print(shaka)
+# print(repr(shaka))
 # print(len(shaka))
-print(jackie)
-print(repr(jackie))
+# print(jackie)
+# print(repr(jackie))
 # print(dir(shaka))
 # print(shaka.__dict__)
+
+# storing and retreiving information about students using files
+file_name = "data.txt"
+shaka = Student("shaka", "stuntin", ["python", "ruby", "javascript"]) 
+print(shaka.find_in_file(file_name)) # checking whether record already exists
+print(shaka.add_to_file(file_name)) # add student to the file
+dalia = Student("dalia", "nirva", ["python", "ruby", "javascript"])
+print(dalia.find_in_file(file_name))
+print(dalia.add_to_file(file_name))
