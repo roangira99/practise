@@ -1,2 +1,3 @@
-craig,walker:python,ruby,javascript
- 
+shaka,stuntin:python,ruby,javascript
+dalia,nirva:python,ruby,javascript
+craig,marduk:java,c++,SQL

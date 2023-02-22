@@ -1,4 +1,5 @@
 # Classes
+# !!!!! Check the read_and_write_demo.py file to get explanations of function functionality !!!!!
 
 class Student: # class definition
     # The init method initializes an instance of your object
@@ -34,7 +35,13 @@ in the {course} course.")
             return False
 
     def add_to_file(self, filename):
-        pass
+        if self.find_in_file(filename):
+            return "Record already exists"
+        else:
+            record_to_add = Student.prep_to_write(self.first_name, self.last_name, self.courses)
+            with open(filename, "a+") as to_write:
+                to_write.write(record_to_add+"\n")
+            return "Record added"
 
     # The function below reads in from the file and extracts the information to creat Students from them
     # function to convert string to parameters for __init__
@@ -44,6 +51,12 @@ in the {course} course.")
         first_name, last_name = line[0].split(",") # take the first element (indexed by 0) then split it based on the comma so as to get two elements i.e first name and last name in a list
         course_details = line[1].rstrip().split(",") # take the second element (indexed by 1) then split it based on the comma to give you the 3 courses in list format. The rstrip() method gets rid of the new line character
         return first_name, last_name, course_details
+    
+    @staticmethod
+    def prep_to_write(first_name, last_name, courses):
+        full_name = first_name+','+last_name
+        courses = ",".join(courses)
+        return full_name+':'+courses
     
     # special method for altering the default functinality of the equality operator
     def __eq__(self, other):
@@ -61,10 +74,14 @@ in the {course} course.")
         return f"First name: {self.first_name.capitalize()}\nLast name: {self.last_name.capitalize()}\
             \nCourses: {', '.join(map(str.capitalize, self.courses))}" # the map function runs the capitalize method on each element of the list
 
+# storing and retreiving information about students using files
 file_name = "data.txt"
-mashrur = Student("mashrur","hossain",["python","ruby","javascript"]) # instance of the student we're passing in/ self
-print(mashrur.find_in_file(file_name))
-print(mashrur.add_to_file(file_name))
-joe = Student("john","schmoe",["python","ruby","javascript"])
-print(joe.find_in_file(file_name))
-print(joe.add_to_file(file_name))
+shaka = Student("shaka", "stuntin", ["python", "ruby", "javascript"]) 
+print(shaka.find_in_file(file_name)) # checking whether record already exists
+print(shaka.add_to_file(file_name)) # add student to the file
+dalia = Student("dalia", "nirva", ["python", "ruby", "javascript"])
+print(dalia.find_in_file(file_name))
+print(dalia.add_to_file(file_name))
+craig = Student("craig", "marduk", ["java", "c++", "SQL"])
+print(craig.find_in_file(file_name))
+print(craig.add_to_file(file_name))

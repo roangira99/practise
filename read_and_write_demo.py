@@ -75,7 +75,7 @@ to_write = prep_to_write(first_name, last_name, course_details)
 print(to_write)
 record_to_add = "mark,pillager:python,ruby,javascript"
 
-#  Function to convert Student object to string for write to file
+# Function to convert Student object to string for write to file
 
 # joe,schmo:python,ruby,javascript
 # john,schmoe:python,ruby,javascript
