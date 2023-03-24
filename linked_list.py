@@ -28,7 +28,7 @@ class LinkedList:
         curr = self.head
         while curr is not None:
             to_print += str(curr.data) + "->" # adding the string version of curr.data to to_print which is initially empty
-            curr = curr.next # going to the next element in the next iteration of the while loop
+            curr =  curr.next # going to the next element in the next iteration of the while loop
         if to_print:
             return "[" + to_print[:-2] + "]" # :-2 slices the last two elements from the returned string
         return "[]"
