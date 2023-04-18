@@ -63,27 +63,71 @@ class BSTDemo:
             self._pre_order(curr.right_child)
             print(curr.data, end=" ")
 
+    # search for a value in the tree
+    def find_val(self, key):
+        return self._find_val(self.root, key) # Kick off the search with the root node
+        
+    def _find_val(self, curr, key):
+        if curr:
+            if key == curr.data:
+                return "Value found in tree"
+            elif key < curr.data:
+                return self._find_val(curr.left_child, key)
+            else:
+                return self._find_val(curr.right_child, key)
+        return "Value not found in tree"
+    
+    def delete_val(self, key):
+        self._delete_val(self.root, None, None, key)
+
+    def _delete_val(self, curr, prev, is_left, key):
+        if curr:
+            if key == curr.data:
+                if is_left:
+                    prev.left_child = None
+                else:
+                    prev.right_child = None
+            elif key < curr.data:
+                self._delete_val(curr.left_child, curr, True, key)
+            elif key > curr.data:
+                self._delete_val(curr.right_child, curr, False, key)
+        else:
+            print(f"{key} not found in tree")
+
 tree = BSTDemo()
 tree.insert("F")
-# print(tree.root.data)
-tree.insert("C")
-# print(tree.root.left_child.data)
-tree.insert("G")
-# print(tree.root.right_child.data)
-tree.insert("A")
-# print(tree.root.left_child.left_child.data)
-tree.insert("B")
-# print(tree.root.left_child.left_child.right_child.data)
-tree.insert("K")
-# print(tree.root.right_child.right_child.data)
 tree.insert("H")
-# print(tree.root.right_child.right_child.left_child.data)
-tree.insert("E")
-tree.insert("D")
-tree.insert("I")
-tree.insert("M")
-tree.insert("J")
-tree.insert("L")
 tree.in_order()
-tree.pre_order()
-tree.post_order()
+tree.delete_val("H")
+tree.in_order()
+
+
+# tree.insert("F")
+# # print(tree.root.data)
+# tree.insert("C")
+# # print(tree.root.left_child.data)
+# tree.insert("G")
+# # print(tree.root.right_child.data)
+# tree.insert("A")
+# # print(tree.root.left_child.left_child.data)
+# tree.insert("B")
+# # print(tree.root.left_child.left_child.right_child.data)
+# tree.insert("K")
+# # print(tree.root.right_child.right_child.data)
+# tree.insert("H")
+# # print(tree.root.right_child.right_child.left_child.data)
+# tree.insert("E")
+# tree.insert("D")
+# tree.insert("I")
+# tree.insert("M")
+# tree.insert("J")
+# tree.insert("L")
+# tree.in_order()
+# tree.pre_order()
+# tree.post_order()
+# print(tree.find_val("C"))
+
+
+# We need to know the parent of the node we want to remove
+# We need to determine whether the node we want to remove is the 
+# left child or the right child
