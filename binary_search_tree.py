@@ -1,8 +1,9 @@
-class Node: 
+class Node:
     def __init__(self, key):
         self.data = key
         self.left_child = None
         self.right_child = None
+
 
 class BSTDemo:
     def __init__(self):
@@ -18,17 +19,16 @@ class BSTDemo:
 
     # a private method in Python - a private method is meant for use within a class by other methods in the same class
     def _insert(self, curr, key):
-        if key.data > curr.data: # if the node being inserted is greater than the root node
-            if curr.right_child == None: # if there is no node on the right child of the root
-                curr.right_child = key # the node goes to the right
-            else: # if there is an existing right child
-                self._insert(curr.right_child, key) # recursive function call with the existing right child as the root
-        elif key.data < curr.data: 
-            if curr.left_child == None: 
+        if key.data > curr.data:  # if the node being inserted is greater than the root node
+            if curr.right_child == None:  # if there is no node on the right child of the root
+                curr.right_child = key  # the node goes to the right
+            else:  # if there is an existing right child
+                self._insert(curr.right_child, key)  # recursive function call with the existing right child as the root
+        elif key.data < curr.data:
+            if curr.left_child == None:
                 curr.left_child = key
-            else: 
-                self._insert(curr.left_child, key) 
-    
+            else:
+                self._insert(curr.left_child, key)
 
     def in_order(self):
         # left, root, right
@@ -65,8 +65,8 @@ class BSTDemo:
 
     # search for a value in the tree
     def find_val(self, key):
-        return self._find_val(self.root, key) # Kick off the search with the root node
-        
+        return self._find_val(self.root, key)  # Kick off the search with the root node
+
     def _find_val(self, curr, key):
         if curr:
             if key == curr.data:
@@ -76,17 +76,41 @@ class BSTDemo:
             else:
                 return self._find_val(curr.right_child, key)
         return "Value not found in tree"
-    
+
     def delete_val(self, key):
         self._delete_val(self.root, None, None, key)
 
     def _delete_val(self, curr, prev, is_left, key):
         if curr:
             if key == curr.data:
-                if is_left:
-                    prev.left_child = None
+                # For deleting a node with both left and right child
+                if curr.left_child and curr.right_child:
+                    print("Problem scenario")
+                # For deleting a node with no children
+                elif curr.left_child == None and curr.right_child == None:
+                    if is_left:  # If current node is the left child
+                        prev.left_child = None  # set parent pointer to None
+                    else:
+                        prev.right_child = None
+                elif curr.left_child == None:  # check if the current node (F) has no left child
+                    if prev:  # If previous exists / if not root node
+                        if is_left:  # check if the current node is the left child of the previous node
+                            prev.left_child = curr.right_child  # make the previous node point to the current node's
+                            # right child
+                        else:  # check if the current node is the right child of the previous node
+                            prev.right_child = curr.right_child
+                    else:  # if root node
+                        self.root = curr.right_child  # copy value of the right child to root
                 else:
-                    prev.right_child = None
+                    if prev:
+                        if is_left:  # check if the current node is the left child of the previous node
+                            prev.left_child = curr.left_child  # make the previous node point to the current node's
+                            # left child
+                        else:  # check if the current node is the right child of the previous node
+                            prev.right_child = curr.left_child
+                    else:  # if root node
+                        self.root = curr.left_child  # copy value of the left child to root
+
             elif key < curr.data:
                 self._delete_val(curr.left_child, curr, True, key)
             elif key > curr.data:
@@ -94,17 +118,18 @@ class BSTDemo:
         else:
             print(f"{key} not found in tree")
 
+
 tree = BSTDemo()
 tree.insert("F")
-tree.insert("H")
+tree.insert("C")
 tree.in_order()
-tree.delete_val("H")
+tree.delete_val("C")
 tree.in_order()
-
-
 # tree.insert("F")
-# # print(tree.root.data)
 # tree.insert("C")
+
+
+# # print(tree.root.data)
 # # print(tree.root.left_child.data)
 # tree.insert("G")
 # # print(tree.root.right_child.data)
@@ -129,5 +154,5 @@ tree.in_order()
 
 
 # We need to know the parent of the node we want to remove
-# We need to determine whether the node we want to remove is the 
+# We need to determine whether the node we want to remove is the
 # left child or the right child
