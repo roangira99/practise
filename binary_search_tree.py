@@ -77,6 +77,12 @@ class BSTDemo:
                 return self._find_val(curr.right_child, key)
         return "Value not found in tree"
 
+    def min_right_subtree(self, curr):
+        if curr.left_child == None:
+            return curr
+        else:
+            return self.min_right_subtree(curr.left_child)
+
     def delete_val(self, key):
         self._delete_val(self.root, None, None, key)
 
@@ -85,13 +91,18 @@ class BSTDemo:
             if key == curr.data:
                 # For deleting a node with both left and right child
                 if curr.left_child and curr.right_child:
-                    print("Problem scenario")
+                    min_child = self.min_right_subtree(curr.right_child)  # Obtaining the minimum node in the right subtree
+                    curr.data = min_child.data # copying over the data of the min child to the parent node
+                    self._delete_val(curr.right_child, curr, False, min_child.data)  # removing the duplicate node on the right subtree which we initially copied from
                 # For deleting a node with no children
                 elif curr.left_child == None and curr.right_child == None:
-                    if is_left:  # If current node is the left child
-                        prev.left_child = None  # set parent pointer to None
+                    if prev:
+                        if is_left:  # If current node is the left child
+                            prev.left_child = None  # set parent pointer to None
+                        else:
+                            prev.right_child = None
                     else:
-                        prev.right_child = None
+                        self.root = None
                 elif curr.left_child == None:  # check if the current node (F) has no left child
                     if prev:  # If previous exists / if not root node
                         if is_left:  # check if the current node is the left child of the previous node
@@ -120,33 +131,43 @@ class BSTDemo:
 
 
 tree = BSTDemo()
+
+# tree.insert("C")
+# tree.in_order()
+# tree.delete_val("F")
+# tree.in_order()
+
 tree.insert("F")
 tree.insert("C")
+# print(tree.root.data)
+# print(tree.root.left_child.data)
+tree.insert("G")
+# print(tree.root.right_child.data)
+tree.insert("A")
+# print(tree.root.left_child.left_child.data)
+tree.insert("B")
+# print(tree.root.left_child.left_child.right_child.data)
+tree.insert("K")
+# print(tree.root.right_child.right_child.data)
+tree.insert("H")
+# print(tree.root.right_child.right_child.left_child.data)
+tree.insert("E")
+tree.insert("D")
+tree.insert("I")
+tree.insert("M")
+tree.insert("J")
+tree.insert("L")
+tree.in_order()
+tree.delete_val("F")
+tree.in_order()
+tree.in_order()
+tree.delete_val("K")
+tree.in_order()
 tree.in_order()
 tree.delete_val("C")
 tree.in_order()
-# tree.insert("F")
-# tree.insert("C")
+tree.delete_val("Y")
 
-
-# # print(tree.root.data)
-# # print(tree.root.left_child.data)
-# tree.insert("G")
-# # print(tree.root.right_child.data)
-# tree.insert("A")
-# # print(tree.root.left_child.left_child.data)
-# tree.insert("B")
-# # print(tree.root.left_child.left_child.right_child.data)
-# tree.insert("K")
-# # print(tree.root.right_child.right_child.data)
-# tree.insert("H")
-# # print(tree.root.right_child.right_child.left_child.data)
-# tree.insert("E")
-# tree.insert("D")
-# tree.insert("I")
-# tree.insert("M")
-# tree.insert("J")
-# tree.insert("L")
 # tree.in_order()
 # tree.pre_order()
 # tree.post_order()
